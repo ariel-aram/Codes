@@ -3,11 +3,13 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - "[0-9]+.*"
 
 jobs:
   release:
-    if: github.repository == 'haithanh456/Codes'
+    if: >-
+      github.repository == 'haithanh456/Codes' &&
+      !github.event.repository.fork
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,5 +23,7 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.ref_name }}
+          name: v${{ github.ref_name }}
           files: dist/*
           generate_release_notes: true
