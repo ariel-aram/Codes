@@ -1,6 +1,6 @@
 # Codes - BallsDex Extension
 
-Redeemable promo codes system for BallsDex Discord bot (v3).
+A redeemable promo codes system for BallsDex Discord bot (v3).
 
 ## Features
 
@@ -11,20 +11,23 @@ Redeemable promo codes system for BallsDex Discord bot (v3).
 
 ## Installation
 
-Add to your BallsDex `pyproject.toml`:
+Add to your BallsDex `extra.toml`:
 
 ```toml
-dependencies = ["codes-bd"]
+[[ballsdex.packages]]
+location = "git+https://github.com/haithanh456/Codes.git@main"
+path = "codes_app"
+enabled = true
 ```
 
-Then add `codes_app` to your `INSTALLED_APPS` and run migrations.
+Then build & restart your instance by running `docker compose up -d --build`.
 
 ## Configuration
 
 Create promo codes through the Django admin panel with the following fields:
 
 | Field | Description |
-|-------|-------------|
+| ----- | ----------- |
 | `code` | Case-insensitive promo string |
 | `reward_type` | `ball`, `ball_special`, or `money` |
 | `amount` | Money amount (for money reward) |

@@ -2,10 +2,95 @@
 name = "codes-bd"
 version = "1.0.0"
 description = "Redeemable codes system for BallsDex"
+readme = "README.md"
 requires-python = ">=3.14"
-# dependencies = [
-#     "ballsdex>=3.0.0",
-# ]
+authors = [
+    { name = "haithanh456" }
+]
+dependencies = [
+    "discord-py<2.7.1",
+    "django>=6.0.1,<6.2",
+    "pillow>=12.0,<13.0",
+    "django-types>=0.24.0",
+    "pyright>=1.1.411",
+    "ruff>=0.15.21",
+    "ballsdex>=3.1.0",
+    "mdformat>=0.7.17",
+    "pymarkdownlnt>=0.9.20"
+]
+
+[tool.uv]
+override-dependencies = ["django>=6.0.1,<6.2", "pillow>=12.0.1,<13.0"]
+
+[tool.uv.sources]
+ballsdex = {git = "https://github.com/Ballsdex-Team/BallsDex-DiscordBot.git", branch = "v3"}
+
+[tool.mdformat]
+number = true
+wrap = 120
+
+[tool.pymarkdown]
+plugins.md013.enabled = false
+plugins.md041.enabled = false
+
+[tool.pyright]
+typeCheckingMode = "standard"
+include = ["codes_app"]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.git",
+    "**/.venv",
+    "**/migrations"
+]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.14"
+pythonPlatform = "All"
+reportMissingImports = true
+reportMissingTypeStubs = false
+reportPrivateImportUsage = false
+reportUnnecessaryTypeIgnoreComment = true
+reportIncompatibleMethodOverride = "warning"
+reportIncompatibleVariableOverride = "warning"
+useLibraryCodeForTypes = true
+
+[tool.pyrefly]
+source_directories = ["codes_app"]
+ignore_all_errors = false
+python_version = "3.14"
+search_path = [".venv/Lib/site-packages"]
+
+[tool.mypy]
+ignore_missing_imports = false
+python_version = "3.14"
+strict = false
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E203"]
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+"codes_app/migrations/*" = ["E501"]
+
+[tool.tomlsort]
+in_place = true
+spaces_indent_inline_array = 4
+trailing_comma_inline_array = false
+sort_first = [
+    "project",
+    "build-system",
+    "tool.uv.sources",
+    "tool.uv"
+]
 
 [build-system]
 requires = ["hatchling"]
